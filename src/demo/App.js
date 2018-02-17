@@ -3,6 +3,7 @@ import { Nfc } from '../lib';
 
 const App = () => (
   <div>
+    Test App
     <Nfc />
   </div>
 );

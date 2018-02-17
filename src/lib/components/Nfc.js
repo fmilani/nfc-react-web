@@ -1,17 +1,9 @@
 import { Component } from 'react';
+import readNfcTag from '../helpers/readNfcTag';
 
 export default class Nfc extends Component {
-  readTag = () => {
-    navigator.nfc.watch(
-      message => {
-        console.log(JSON.stringify(message.records[0]));
-      },
-      { mode: 'any' },
-    );
-  };
-
   componentDidMount() {
-    this.readTag();
+    readNfcTag();
   }
 
   render() {
