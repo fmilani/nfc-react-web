@@ -1,12 +1,19 @@
 import { Component } from 'react';
 import readNfcTag from '../helpers/readNfcTag';
 
-export default class Nfc extends Component {
+class Nfc extends Component {
   componentDidMount() {
-    readNfcTag();
+    const { timeout } = this.props;
+    readNfcTag(timeout);
   }
 
   render() {
     return null;
   }
 }
+
+Nfc.defaultProps = {
+  timeout: 10,
+};
+
+export default Nfc;
