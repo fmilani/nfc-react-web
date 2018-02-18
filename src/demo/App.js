@@ -4,7 +4,11 @@ import { Nfc } from '../lib';
 const App = () => (
   <div>
     Test App
-    <Nfc />
+    <Nfc
+      read={records => {
+        alert(records[0].data);
+      }}
+    />
   </div>
 );
 

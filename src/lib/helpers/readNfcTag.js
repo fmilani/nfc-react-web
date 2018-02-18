@@ -1,8 +1,11 @@
-const readNfcTag = (timeout = 15) => {
+const readNfcTag = (timeout = 15, readCallback = () => {}) => {
   navigator.nfc
     .watch(
       message => {
-        console.log(JSON.stringify(message.records[0]));
+        console.log(
+          `Tag read. First record: ${JSON.stringify(message.records[0])}`,
+        );
+        readCallback(message.records);
       },
       { mode: 'any' },
     )
