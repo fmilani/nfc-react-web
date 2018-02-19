@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Nfc } from '../lib';
+import Nfc from '../lib/';
 
 const buttonStyle = {
   fontSize: 50,
