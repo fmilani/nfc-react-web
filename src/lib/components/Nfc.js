@@ -5,8 +5,12 @@ import writeNfcTag from '../helpers/writeNfcTag';
 /**
  * API:
  * const App = () => (
+ *   // reading
  *   <div>Tap to a tag to read it</div>
  *   <Nfc read={(data) => {console.log(data)}} />
+ *
+ *   // writing
+ *   <div>Tap to a tag to write to it</div>
  *   <Nfc write='some_data' />
  * )
  *
@@ -15,7 +19,9 @@ class Nfc extends Component {
   componentDidMount() {
     const { timeout, read, write } = this.props;
     if (read && write) {
-      throw Error('It is not possible to read and write at the same time :(');
+      throw new Error(
+        'It is not possible to read and write at the same time :(',
+      );
     }
     if (read) {
       readNfcTag(timeout, read);
