@@ -16,6 +16,12 @@ import writeNfcTag from '../helpers/writeNfcTag';
  *
  */
 class Nfc extends Component {
+  constructor(props) {
+    super(props);
+    if (typeof navigator.nfc === 'undefined') {
+      throw new Error('Sorry, your device does not support NFC');
+    }
+  }
   componentDidMount() {
     const { timeout, read, write } = this.props;
     if (read && write) {
