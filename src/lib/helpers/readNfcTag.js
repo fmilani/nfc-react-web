@@ -6,6 +6,7 @@ const readNfcTag = (timeout = 15, readCallback = () => {}) => {
           `Tag read. First record: ${JSON.stringify(message.records[0])}`,
         );
         readCallback(message.records);
+        navigator.nfc.cancelWatch();
       },
       { mode: 'any' },
     )
