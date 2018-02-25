@@ -1,3 +1,5 @@
+import cancelWatch from './cancelWatch';
+
 const readNfcTag = (timeout = 15, readCallback = () => {}) => {
   navigator.nfc
     .watch(
@@ -12,19 +14,7 @@ const readNfcTag = (timeout = 15, readCallback = () => {}) => {
     )
     .then(watchId => {
       setTimeout(() => {
-        navigator.nfc
-          .cancelWatch(watchId)
-          .then(() => {
-            console.log('Watching for a nfc tag timed out.');
-          })
-          .catch(error => {
-            if (error.name === 'NotFoundError') {
-              // we're ignoring NotFoundError, assuming it happened because the
-              // watch was already cancelled after a write
-              return;
-            }
-            throw error;
-          });
+        cancelWatch(watchId);
       }, timeout * 1000);
     });
 };

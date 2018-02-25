@@ -1,4 +1,5 @@
 import readNfcTag from './readNfcTag';
+import cancelWatch from './cancelWatch';
 
 const writeNfcTag = (timeout = 15, data = '') => {
   readNfcTag(timeout, () => {
@@ -11,7 +12,7 @@ const writeNfcTag = (timeout = 15, data = '') => {
       })
       .then(() => {
         console.log('Tag successfully written.');
-        navigator.nfc.cancelWatch();
+        cancelWatch();
       })
       .catch(error => {
         console.log('Could not write to tag. Error: ', error);
