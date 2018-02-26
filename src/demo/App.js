@@ -31,7 +31,16 @@ const WriteButton = () => (
     onClick={() => {
       ReactDOM.unmountComponentAtNode(document.getElementById('nfc-container'));
       ReactDOM.render(
-        <Nfc write="Written with nfc-react-web" />,
+        <Nfc
+          write="Written with nfc-react-web"
+          writeCallback={error => {
+            let callbackMsg = 'Write successfull';
+            if (error) {
+              callbackMsg = `error from writeCallback: ${error}`;
+            }
+            alert(callbackMsg);
+          }}
+        />,
         document.getElementById('nfc-container'),
       );
     }}

@@ -11,7 +11,7 @@ import writeNfcTag from '../helpers/writeNfcTag';
  *
  *   // writing
  *   <div>Tap to a tag to write to it</div>
- *   <Nfc write='some_data' />
+ *   <Nfc write='some_data' writeCallback={(error) => {}} />
  * )
  *
  */
@@ -23,7 +23,7 @@ class Nfc extends Component {
     }
   }
   componentDidMount() {
-    const { timeout, read, write } = this.props;
+    const { timeout, read, write, writeCallback } = this.props;
     if (read && write) {
       throw new Error(
         'It is not possible to read and write at the same time :(',
@@ -32,7 +32,7 @@ class Nfc extends Component {
     if (read) {
       readNfcTag(timeout, read);
     } else if (write) {
-      writeNfcTag(timeout, write);
+      writeNfcTag(timeout, write, writeCallback);
     }
   }
 
