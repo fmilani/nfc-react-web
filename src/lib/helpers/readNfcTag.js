@@ -1,6 +1,6 @@
 import cancelWatch from './cancelWatch';
 
-const readNfcTag = (timeout = 15, readCallback = () => {}) => {
+const readNfcTag = (timeout = 15, readCallback = () => {}, readOnce = true) => {
   navigator.nfc
     .watch(
       message => {
@@ -8,11 +8,14 @@ const readNfcTag = (timeout = 15, readCallback = () => {}) => {
           `Tag read. First record: ${JSON.stringify(message.records[0])}`,
         );
         readCallback(message.records);
-        navigator.nfc.cancelWatch();
+        if (readOnce) {
+          cancelWatch();
+        }
       },
       { mode: 'any' },
     )
     .then(watchId => {
+      console.log('Started watching for a nfc tag');
       setTimeout(() => {
         cancelWatch(watchId);
       }, timeout * 1000);

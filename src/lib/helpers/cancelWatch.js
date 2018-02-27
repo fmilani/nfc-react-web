@@ -2,7 +2,7 @@ const cancelWatch = watchId => {
   navigator.nfc
     .cancelWatch(watchId)
     .then(() => {
-      console.log('Watching for a nfc tag timed out.');
+      console.log('Watching for a nfc tag cancelled.');
     })
     .catch(error => {
       if (error.name === 'NotFoundError') {
