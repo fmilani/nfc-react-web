@@ -5,7 +5,10 @@ const readNfcTag = (timeout = 15, readCallback = () => {}, readOnce = true) => {
     .watch(
       message => {
         console.log(
-          `Tag read. First record: ${JSON.stringify(message.records[0])}`,
+          `Tag read.
+            First record: ${JSON.stringify(message.records[0])}
+            Url: ${message.url}
+            `,
         );
         readCallback(message.records);
         if (readOnce) {
